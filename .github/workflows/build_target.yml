@@ -41,6 +41,13 @@ jobs:
           ./build_package_android ./releases
           sudo chmod -R 755 ./releases
 
+      - name: Save APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Volla-Launcher-APK
+          path: releases/*.apk
+          if-no-files-found: error
+
       - name: Upload Apk to Nightly Repository
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: wlixcc/SFTP-Deploy-Action@v1.0
